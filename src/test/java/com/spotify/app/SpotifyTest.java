@@ -1,11 +1,10 @@
 package com.spotify.app;
 
-import org.sikuli.script.Key;
-import org.sikuli.script.KeyModifier;
+import org.sikuli.script.FindFailed;
+import org.sikuli.script.Screen;
+import org.sikuli.script.App;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.sikuli.script.App;
-import org.sikuli.script.Screen;
 import helpers.*;
 
 public class SpotifyTest {
@@ -14,12 +13,25 @@ public class SpotifyTest {
     private Screen s;
 
     @Test
-    public void main() {
-        s.type("a", KeyModifier.CMD);
-        s.type(Key.BACKSPACE);
-        s.type(System.getenv("SPOTIFY_USER"));
-        s.type(Key.TAB);
-        s.type(System.getenv("SPOTIFY_PASSWORD"));
+    public void invalidLoginTest() {
+        general.login(s, System.getenv("SPOTIFY_USER"), " ");
+        try {
+            s.find("img/login_error");
+
+        } catch (FindFailed findFailed) {
+            Assert.fail("Cound not find image");
+        }
+    }
+
+    @Test
+    public void validLoginTest(){
+        general.login(s, System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
+        try {
+            s.find("img/search_bar");
+
+        } catch (FindFailed findFailed) {
+            Assert.fail("Cound not find image");
+        }
     }
 
     @BeforeClass
