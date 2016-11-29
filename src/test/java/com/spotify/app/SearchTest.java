@@ -1,7 +1,6 @@
 package com.spotify.app;
 
 import org.sikuli.script.Screen;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObject.*;
 

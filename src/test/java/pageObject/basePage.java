@@ -17,6 +17,8 @@ public class BasePage {
     private static String loginLogo = "img/logo";
     private static String playButton = "img/play_button";
     private static String pauseButton = "img/pause_button";
+    private static String muted = "img/muted";
+    private static String unmuted = "img/unmuted";
 
     public BasePage(Screen s) {
         String app_location;
@@ -92,20 +94,35 @@ public class BasePage {
         find_image(playButton);
     }
 
-    public void click_play() {
+    public void verify_muted() {
+        find_image(muted);
+    }
+
+    public void verify_unmuted() {
+        find_image(unmuted);
+    }
+
+    private void click_image(String image){
         try {
-            this.screen.click(playButton);
+            this.screen.click(image);
         } catch (FindFailed findFailed){
             findFailed.printStackTrace();
         }
+    }
+
+    public void click_play() {
+            click_image(playButton);
     }
 
     public void click_pause() {
-        try {
-            this.screen.click(pauseButton);
-        } catch (FindFailed findFailed){
-            findFailed.printStackTrace();
-        }
+        click_image(pauseButton);
     }
 
+    public void click_mute() {
+        click_image(unmuted);
+    }
+
+    public void click_unmute() {
+        click_image(muted);
+    }
 }
