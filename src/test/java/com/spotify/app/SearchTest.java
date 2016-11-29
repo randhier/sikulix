@@ -7,42 +7,40 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import helpers.*;
 
-public class SpotifyTest {
+public class SearchTest {
 
     private App spotify;
     private Screen s;
 
     @Test
-    public void invalidLoginTest() {
-        general.login(s, System.getenv("SPOTIFY_USER"), " ");
-        try {
-            s.find("img/login_error");
-
-        } catch (FindFailed findFailed) {
-            Assert.fail("Cound not find image");
-        }
-    }
-
-    @Test
-    public void validLoginTest(){
+    public void searchTest(){
         general.login(s, System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
         try {
             s.find("img/search_bar");
+            s.find("img/browse_tabs");
+
+        } catch (FindFailed findFailed) {
+            Assert.fail("Cound not find image");
+        }
+        general.search(s, "Chronixx");
+        try {
+            s.find("img/search_chronixx");
 
         } catch (FindFailed findFailed) {
             Assert.fail("Cound not find image");
         }
     }
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         s = new Screen();
         spotify = App.open(general.appLocation());
         spotify.focus();
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
-        spotify.close();
+        general.logout(s);
+        general.closeApp(spotify);
     }
 }
