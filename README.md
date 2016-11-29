@@ -23,6 +23,7 @@ Debated whether to use current track bar as another pageobject but due to time c
 # Notes
 Control of a test environment where the data could be fixtured and then deleted would have been best.
 It would have provided the following:
+
 * A new user could be create/inserted prior to all tests and then deleted.
 * New user will not have any existing playlists so creation of playlists can be done without fear of existing.
 * Able to fixture a playlist and then verify songs on UI.
