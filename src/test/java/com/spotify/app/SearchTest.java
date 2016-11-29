@@ -2,19 +2,18 @@ package com.spotify.app;
 
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
-import org.sikuli.script.App;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import helpers.*;
+import pageObject.*;
 
 public class SearchTest {
 
-    private App spotify;
     private Screen s;
+    private BasePage BasePage;
 
     @Test
     public void searchTest(){
-        general.login(s, System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
+        BasePage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
         try {
             s.find("img/search_bar");
             s.find("img/browse_tabs");
@@ -22,7 +21,7 @@ public class SearchTest {
         } catch (FindFailed findFailed) {
             Assert.fail("Cound not find image");
         }
-        general.search(s, "Chronixx");
+        BasePage.search("Chronixx");
         try {
             s.find("img/search_chronixx");
 
@@ -34,13 +33,12 @@ public class SearchTest {
     @BeforeMethod
     public void setUp() {
         s = new Screen();
-        spotify = App.open(general.appLocation());
-        spotify.focus();
+        BasePage = new BasePage(s);
     }
 
     @AfterMethod
     public void tearDown() {
-        general.logout(s);
-        general.closeApp(spotify);
+        BasePage.logout();
+        BasePage.closeApp();
     }
 }

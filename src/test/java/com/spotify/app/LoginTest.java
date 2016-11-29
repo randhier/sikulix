@@ -1,50 +1,36 @@
 package com.spotify.app;
 
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
-import org.sikuli.script.App;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import helpers.*;
+import pageObject.*;
 
 public class LoginTest {
 
-    private App spotify;
     private Screen s;
+    private BasePage BasePage;
 
     @Test
     public void invalidLoginTest() {
-        general.login(s, System.getenv("SPOTIFY_USER"), " ");
-        try {
-            s.find("img/login_error");
-
-        } catch (FindFailed findFailed) {
-            Assert.fail("Cound not find image");
-        }
+        BasePage.login(System.getenv("SPOTIFY_USER"), " ");
+        BasePage.find_login_error();
     }
 
     @Test
     public void validLoginTest(){
-        general.login(s, System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
-        try {
-            s.find("img/search_bar");
-            s.find("img/browse_tabs");
-
-        } catch (FindFailed findFailed) {
-            Assert.fail("Cound not find image");
-        }
+        BasePage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
+        BasePage.find_login_images();
     }
 
     @BeforeMethod
     public void setUp() {
         s = new Screen();
-        spotify = App.open(general.appLocation());
-        spotify.focus();
+        BasePage = new BasePage(s);
     }
 
     @AfterMethod
     public void tearDown() {
-        general.logout(s);
-        general.closeApp(spotify);
+        BasePage.logout();
+        BasePage.closeApp();
     }
 }
