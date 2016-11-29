@@ -25,7 +25,6 @@ public class MuteTest {
         BasePage.click_unmute();
         BasePage.click_search_bar();
         BasePage.verify_unmuted();
-
     }
 
     @BeforeMethod
