@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObject.*;
 
-public class SearchTest {
+public class PlayTest {
 
     private Screen s;
     private BasePage BasePage;
@@ -15,8 +15,13 @@ public class SearchTest {
     public void searchTest(){
         LoginPage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
         BasePage.find_login_images();
-        BasePage.search("Chronixx");
-        BasePage.find_search_image();
+        BasePage.find_play_image();
+        BasePage.click_play();
+        BasePage.click_search_bar();
+        BasePage.verify_play();
+        BasePage.click_pause();
+        BasePage.click_search_bar();
+        BasePage.find_play_image();
     }
 
     @BeforeMethod

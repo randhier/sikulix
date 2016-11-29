@@ -3,51 +3,41 @@ package pageObject;
 import org.sikuli.basics.Settings;
 import org.sikuli.script.*;
 import org.testng.Assert;
+import org.testng.mustache.StringChunk;
 
 
 public class BasePage {
 
-    App spotify;
     Screen screen;
+    private App spotify;
+    public int selectKey;
+    private static String searchBar = "img/search_bar";
+    private static String browseTabs = "img/browse_tabs";
+    private static String searchResult = "img/search_chronixx";
+    private static String loginLogo = "img/logo";
+    private static String playButton = "img/play_button";
+    private static String pauseButton = "img/pause_button";
 
     public BasePage(Screen s) {
+        String app_location;
+        if (Settings.isMac()) {
+            this.selectKey = KeyModifier.CMD;
+            app_location = "/Applications/Spotify.app/Contents/MacOS/Spotify";
+        } else {
+            this.selectKey = KeyModifier.CTRL;
+            // Enter win launcher location here
+            app_location = "spotify.exe";
+        }
         this.screen = s;
-        this.spotify = App.open(appLocation());
+        this.spotify = App.open(app_location);
         this.spotify.focus();
     }
 
-    public String appLocation() {
-        String OS;
-        if (Settings.isMac()) {
-            OS = "/Applications/Spotify.app/Contents/MacOS/Spotify";
-        } else {
-            // assuming if not MAC then Win. Enter win launcher location here
-            OS = "spotify.exe";
-        }
-        return OS;
-    }
-
-    public void login(String user, String password){
-        try {
-            this.screen.click("img/logo");
-        } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
-        }
-        this.screen.type(Key.TAB + Key.TAB);
-        this.screen.type("a", KeyModifier.CMD);
-        this.screen.type(Key.BACKSPACE + user);
-        this.screen.type(Key.TAB + password);
-        try {
-            this.screen.click("img/login");
-        } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
-        }
-    }
-
     public void logout(){
-        this.screen.type("w",  KeyModifier.CMD | KeyModifier.SHIFT);
+        // Not sure what the Windows command is but I think this is correct
+        this.screen.type("w",  this.selectKey | KeyModifier.SHIFT);
         try {
-            this.screen.find("img/logo");
+            this.screen.find(loginLogo);
         } catch (FindFailed findFailed) {
             findFailed.printStackTrace();
         }
@@ -63,31 +53,59 @@ public class BasePage {
     }
 
     public void search(String search) {
-        try {
-            this.screen.click("img/search_bar");
-        } catch (FindFailed findFailed){
-            findFailed.printStackTrace();
-        }
+        click_search_bar();
         this.screen.type("Chronixx");
         this.screen.type(Key.ENTER);
     }
 
-    public void find_login_error(){
+    public void click_search_bar() {
         try {
-            this.screen.find("img/login_error");
+            this.screen.click(searchBar);
+        } catch (FindFailed findFailed){
+            findFailed.printStackTrace();
+        }
+    }
 
-        } catch (FindFailed findFailed) {
-            Assert.fail("Cound not find image");
+    public void find_image(String... images) {
+        for (String i : images) {
+            try {
+                this.screen.find(i);
+            } catch (FindFailed findFailed) {
+                Assert.fail("Could not find image");
+            }
         }
     }
 
     public void find_login_images(){
-        try {
-            this.screen.find("img/search_bar");
-            this.screen.find("img/browse_tabs");
+        find_image(searchBar, browseTabs);
+    }
 
-        } catch (FindFailed findFailed) {
-            Assert.fail("Cound not find image");
+    public void find_search_image() {
+        find_image(searchResult);
+    }
+
+    public void find_play_image() {
+        find_image(playButton);
+    }
+
+    public void verify_play() {
+        find_image(playButton);
+    }
+
+    public void click_play() {
+        try {
+            this.screen.click(playButton);
+        } catch (FindFailed findFailed){
+            findFailed.printStackTrace();
         }
     }
+
+    public void click_pause() {
+        try {
+            this.screen.click(pauseButton);
+        } catch (FindFailed findFailed){
+            findFailed.printStackTrace();
+        }
+    }
+
 }

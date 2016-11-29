@@ -7,25 +7,26 @@ import pageObject.*;
 
 public class LoginTest {
 
-    private Screen s;
     private BasePage BasePage;
+    private LoginPage LoginPage;
 
     @Test
     public void invalidLoginTest() {
-        BasePage.login(System.getenv("SPOTIFY_USER"), " ");
-        BasePage.find_login_error();
+        LoginPage.login(System.getenv("SPOTIFY_USER"), " ");
+        LoginPage.find_login_error();
     }
 
     @Test
     public void validLoginTest(){
-        BasePage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
+        LoginPage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
         BasePage.find_login_images();
     }
 
     @BeforeMethod
     public void setUp() {
-        s = new Screen();
+        Screen s = new Screen();
         BasePage = new BasePage(s);
+        LoginPage = new LoginPage(s);
     }
 
     @AfterMethod
