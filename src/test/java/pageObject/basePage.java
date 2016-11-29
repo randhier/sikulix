@@ -56,7 +56,7 @@ public class BasePage {
 
     public void search(String search) {
         click_search_bar();
-        this.screen.type("Chronixx");
+        this.screen.type(search);
         this.screen.type(Key.ENTER);
     }
 
