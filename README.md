@@ -5,8 +5,9 @@ mvn install
 ## Run Tests (uses TestNG)
 mvn test
 # Restrictions
-##### Required ENV variables
+#### Required ENV variables
 SPOTIFY_USER = Spotify user name
+
 SPOTIFY_PASSWORD = Spotify user password
 #### Spotify app
 Installed and connect to DB/backend
