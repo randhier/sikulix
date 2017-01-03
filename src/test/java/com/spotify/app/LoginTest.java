@@ -1,5 +1,6 @@
 package com.spotify.app;
 
+import junit.framework.Assert;
 import org.sikuli.script.Screen;
 import org.testng.annotations.*;
 import com.spotify.app.pageObject.*;
@@ -12,13 +13,13 @@ public class LoginTest {
     @Test
     public void invalidLoginTest() {
         LoginPage.login(System.getenv("SPOTIFY_USER"), " ");
-        LoginPage.find_login_error();
+        Assert.assertTrue(LoginPage.find_login_error());
     }
 
     @Test
     public void validLoginTest(){
         LoginPage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
-        BasePage.find_login_images();
+        Assert.assertTrue(BasePage.find_login_images());
     }
 
     @BeforeMethod

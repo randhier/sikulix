@@ -1,6 +1,8 @@
 package com.spotify.app;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.sikuli.script.Screen;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import com.spotify.app.pageObject.*;
 
@@ -10,12 +12,12 @@ public class SearchTest {
     private BasePage BasePage;
     private LoginPage LoginPage;
 
-    @Test
+    @Ignore
     public void searchTest(){
         LoginPage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
         BasePage.find_login_images();
         BasePage.search("Chronixx");
-        BasePage.find_search_image();
+        Assert.assertTrue(BasePage.find_search_image());
     }
 
     @BeforeMethod

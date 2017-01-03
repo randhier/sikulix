@@ -1,6 +1,7 @@
 package com.spotify.app;
 
 import org.sikuli.script.Screen;
+import org.testng.Assert;
 import org.testng.annotations.*;
 import com.spotify.app.pageObject.*;
 
@@ -13,8 +14,8 @@ public class MuteTest {
     @Test
     public void muteTest(){
         LoginPage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
-        BasePage.find_login_images();
-        BasePage.find_play_image();
+        Assert.assertTrue(BasePage.find_login_images());
+        Assert.assertTrue(BasePage.find_play_image());
         BasePage.click_play();
         BasePage.click_search_bar();
         BasePage.verify_play();
@@ -24,7 +25,7 @@ public class MuteTest {
         BasePage.click_search_bar();
         BasePage.click_unmute();
         BasePage.click_search_bar();
-        BasePage.verify_unmuted();
+        Assert.assertTrue(BasePage.verify_unmuted());
     }
 
     @BeforeMethod

@@ -49,7 +49,7 @@ public class BasePage {
         try {
             Thread.sleep(7);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new Error(e);
         }
     }
 
@@ -63,30 +63,34 @@ public class BasePage {
         try {
             this.screen.click(searchBar);
         } catch (FindFailed findFailed){
-            findFailed.printStackTrace();
+            throw new Error(findFailed);
         }
     }
 
-    public void find_image(String... images) {
+    public boolean find_image(String... images) {
+        boolean result = false;
         for (String i : images) {
             try {
                 this.screen.find(i);
+                result = true;
             } catch (FindFailed findFailed) {
-                Assert.fail("Could not find image");
+                result = false;
+//                Assert.fail("Could not find image");
             }
         }
+        return result;
     }
 
-    public void find_login_images(){
-        find_image(searchBar, browseTabs);
+    public boolean find_login_images(){
+        return find_image(searchBar, browseTabs);
     }
 
-    public void find_search_image() {
-        find_image(searchResult);
+    public boolean find_search_image() {
+        return find_image(searchResult);
     }
 
-    public void find_play_image() {
-        find_image(playButton);
+    public boolean find_play_image() {
+        return find_image(playButton);
     }
 
     public void verify_play() {
@@ -97,8 +101,8 @@ public class BasePage {
         find_image(muted);
     }
 
-    public void verify_unmuted() {
-        find_image(unmuted);
+    public boolean verify_unmuted() {
+        return find_image(unmuted);
     }
 
     private void click_image(String image){

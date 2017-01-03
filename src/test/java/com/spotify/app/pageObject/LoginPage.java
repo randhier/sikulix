@@ -16,7 +16,7 @@ public class LoginPage extends BasePage{
         try {
             this.screen.click(loginLogo);
         } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
+            throw new Error(findFailed);
         }
         this.screen.type(Key.TAB + Key.TAB);
         this.screen.type("a", this.selectKey);
@@ -25,11 +25,11 @@ public class LoginPage extends BasePage{
         try {
             this.screen.click(loginButton);
         } catch (FindFailed findFailed) {
-            findFailed.printStackTrace();
+            throw new Error(findFailed);
         }
     }
 
-    public void find_login_error(){
-        find_image(loginError);
+    public boolean find_login_error(){
+        return find_image(loginError);
     }
 }
