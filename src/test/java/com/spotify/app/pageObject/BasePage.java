@@ -109,7 +109,7 @@ public class BasePage {
         try {
             this.screen.click(image);
         } catch (FindFailed findFailed){
-            findFailed.printStackTrace();
+            throw new Error(findFailed);
         }
     }
 
