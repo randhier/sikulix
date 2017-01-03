@@ -1,4 +1,4 @@
-package pageObject;
+package com.spotify.app.pageObject;
 
 import org.sikuli.script.*;
 

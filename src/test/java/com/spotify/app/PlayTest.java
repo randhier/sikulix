@@ -2,7 +2,7 @@ package com.spotify.app;
 
 import org.sikuli.script.Screen;
 import org.testng.annotations.*;
-import pageObject.*;
+import com.spotify.app.pageObject.*;
 
 public class PlayTest {
 

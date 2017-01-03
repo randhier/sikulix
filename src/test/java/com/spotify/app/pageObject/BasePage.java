@@ -1,9 +1,8 @@
-package pageObject;
+package com.spotify.app.pageObject;
 
 import org.sikuli.basics.Settings;
 import org.sikuli.script.*;
 import org.testng.Assert;
-import org.testng.mustache.StringChunk;
 
 
 public class BasePage {
