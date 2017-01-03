@@ -93,12 +93,12 @@ public class BasePage {
         return find_image(playButton);
     }
 
-    public void verify_play() {
-        find_image(playButton);
+    public boolean verify_play() {
+        return find_image(playButton);
     }
 
-    public void verify_muted() {
-        find_image(muted);
+    public boolean verify_muted() {
+        return find_image(muted);
     }
 
     public boolean verify_unmuted() {

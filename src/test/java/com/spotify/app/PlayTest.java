@@ -18,7 +18,7 @@ public class PlayTest {
         Assert.assertTrue(BasePage.find_play_image());
         BasePage.click_play();
         BasePage.click_search_bar();
-        BasePage.verify_play();
+        Assert.assertTrue(BasePage.verify_play());
         BasePage.click_pause();
         BasePage.click_search_bar();
         Assert.assertTrue(BasePage.find_play_image());
