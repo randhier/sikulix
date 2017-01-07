@@ -12,7 +12,7 @@ public class SearchTest {
     private BasePage BasePage;
     private LoginPage LoginPage;
 
-    @Ignore
+    @Test
     public void searchTest(){
         LoginPage.login(System.getenv("SPOTIFY_USER"), System.getenv("SPOTIFY_PASSWORD"));
         BasePage.find_login_images();
