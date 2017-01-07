@@ -1,6 +1,5 @@
 package com.spotify.app;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.sikuli.script.Screen;
 import org.testng.Assert;
 import org.testng.annotations.*;
