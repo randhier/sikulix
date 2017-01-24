@@ -15,5 +15,4 @@ Logged out of any user (I tried to find a way to launch in new secession but cou
 
 # Improvements
 * Test on Windows box (I don't have one to verify)
-* Break out BasePage into more component Class/Objects like LoginPage. Browse, Track bar, etc will have their own classes.
 * Launching app in new secession where the previous username is not populated in the Username text box. This caused me to click on the login logo and tab to the usename box instead of looking for an image of an empty one.
